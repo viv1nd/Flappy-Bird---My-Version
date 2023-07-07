@@ -65,4 +65,9 @@ public class MenuManager : MonoBehaviour
         _playButton.gameObject.SetActive(false);
     }
 
+
+    private void OnFood()
+    {
+
+    }
 }
