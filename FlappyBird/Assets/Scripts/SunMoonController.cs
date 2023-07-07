@@ -6,7 +6,7 @@ public class SunMoonController : MonoBehaviour
 {
     [SerializeField] private GameObject _Sun;
     [SerializeField] private GameObject _Moon;
-    [SerializeField, Range(5f, 30f)] private float _duration;
+    [SerializeField, Range(5f, 60f)] private float _duration;
     [SerializeField] private Camera _Maincamera;
     [SerializeField] private Color dayColor;
     [SerializeField] private Color nightColor;
