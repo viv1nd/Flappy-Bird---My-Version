@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ObstacleMover : MonoBehaviour
 {
+    public static event Action onScore;
+
     [SerializeField] private float _speed;
     [SerializeField] private float _xaxisLimit;
 
@@ -13,6 +16,7 @@ public class ObstacleMover : MonoBehaviour
 
         if (this.transform.position.x < _xaxisLimit)
         {
+            onScore?.Invoke();
             Destroy(this.gameObject);
         }
     }

@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -7,19 +7,31 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _restartButton;
     [SerializeField] private GameObject _tappingButton;
+    [SerializeField] private GameObject Game;
+    [SerializeField] private Button _playButton;
+    //[SerializeField] private GameObject _prefab;
     [SerializeField] private TMP_Text _score;
     public BirdController birdController;
+    public SunMoonController SunMoonController;
+
+    private void Start()
+    {
+        Game.SetActive(false);
+        _playButton.onClick.AddListener(OnPlay);
+    }
+
+
 
     private void Awake()
     {
         BirdController.onDeath += OnGameOver;
-        BirdController.onScore += OnScoreText;
+        ObstacleMover.onScore += OnScoreText;
     }
 
     private void OnDestroy()
     {
         BirdController.onDeath -= OnGameOver;
-        BirdController.onScore -= OnScoreText;
+        ObstacleMover.onScore -= OnScoreText;
     }
 
     public void OnRestart()
@@ -33,12 +45,24 @@ public class MenuManager : MonoBehaviour
 
     private void OnScoreText()
     {
-        _score.text = (int.Parse(_score.text) + 1).ToString();
+        if (SunMoonController.isDay)
+        {
+            _score.text = (int.Parse(_score.text) + 1).ToString();
+        }
+        else
+        {
+            _score.text = (int.Parse(_score.text) + 2).ToString();
+        }
     }
-     public void OnTap()
+    public void OnTap()
     {
-        //_tappingButton.SetActive(true);
         birdController.Flap();
+    }
+
+    public void OnPlay()
+    {
+        Game.SetActive(true);
+        _playButton.gameObject.SetActive(false);
     }
 
 }
