@@ -672,6 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 2162799030429793718, guid: cb92c06a04d15604eb498d8217b25757, type: 3}
   _time: 2
+  levelLength: 20
 --- !u!1 &1156012522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,7 +2152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 8705148575976792795, guid: cc2b3944fd0502a49be9757b154de4e9, type: 3}
-  _time: 1.5
+  _time: 3
+  levelLength: 20
   minY: -0.5
   maxY: 5
 --- !u!114 &2099649337
@@ -2167,7 +2169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 3435783015100682305, guid: 3a53e59310180f648982c0c79805e80d, type: 3}
-  _time: 1
+  _time: 2
+  levelLength: 20
   fixedY: -3.5
 --- !u!4 &2099649338
 Transform:
@@ -2198,6 +2201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 8397226120738822145, guid: 7a350dd9a3307664eae049c717f5e7a7, type: 3}
   _time: 15
+  levelLength: 20
   minY: -1
   maxY: 3
 --- !u!4 &4160147939050969680

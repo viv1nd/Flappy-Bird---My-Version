@@ -26,6 +26,7 @@ public class ObstacleSpawner : MonoBehaviour
         if(_levelStatus > levelLength)
         {
             gameSpeed = gameSpeed + 0.5f;
+            levelLength = levelLength + levelLength;
             _levelStatus = 0;
         }
 
