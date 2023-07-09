@@ -14,6 +14,8 @@ public class MenuManager : MonoBehaviour
     public BirdController birdController;
     public SunMoonController SunMoonController;
 
+    public static bool IsPlaying = false;
+
     private void Start()
     {
         Game.SetActive(false);
@@ -40,6 +42,7 @@ public class MenuManager : MonoBehaviour
     }
     private void OnGameOver()
     {
+        IsPlaying = false;
         _restartButton.SetActive(true);
     }
 
@@ -61,13 +64,9 @@ public class MenuManager : MonoBehaviour
 
     public void OnPlay()
     {
+        IsPlaying = true;
         Game.SetActive(true);
         _playButton.gameObject.SetActive(false);
     }
-
-
-    private void OnFood()
-    {
-
-    }
+        
 }

@@ -12,6 +12,8 @@ public class BirdController : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public HealthManager healthBar;
+    public int healthGain = 10;
+    public int damage = 2;
 
     [SerializeField] private Rigidbody2D _rb2d;
     [SerializeField] private float _force;
@@ -44,22 +46,38 @@ public class BirdController : MonoBehaviour
     {
         if (col.tag == "Tree")
         {
-             TakeDamage(2);
+            TakeDamage(damage);
         }
 
         if (col.tag == "Cloud")
         {
             col.gameObject.SetActive(false);
-            TakeDamage(2);
+            TakeDamage(damage);
+        }
+
+        if (col.tag == "Food")
+        {
+            if (currentHealth <= maxHealth - healthGain)
+            {
+                col.gameObject.SetActive(false);
+                healthBar.SetHealth(currentHealth + healthGain);
+                
+            }
+            else if ( currentHealth > maxHealth - healthGain)
+            {
+                col.gameObject.SetActive(false);
+                healthBar.SetHealth(maxHealth);
+                
+            }
         }
     }
 
     //private void OnTriggerExit2D(Collider2D col)
     //{
-        //if (col.tag == "Obstacle")
-        //{
-            //onScore?.Invoke();
-        //}
+    //if (col.tag == "Obstacle")
+    //{
+    //onScore?.Invoke();
+    //}
     //}
 
 
