@@ -22,7 +22,13 @@ public class MenuManager : MonoBehaviour
         _playButton.onClick.AddListener(OnPlay);
     }
 
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OnTap();
+        }
+    }
 
     private void Awake()
     {
@@ -59,11 +65,17 @@ public class MenuManager : MonoBehaviour
     }
     public void OnTap()
     {
+
+        if (IsPlaying == false)
+        {
+            OnPlay();
+        }
         birdController.Flap();
     }
 
     public void OnPlay()
     {
+        
         IsPlaying = true;
         Game.SetActive(true);
         _playButton.gameObject.SetActive(false);

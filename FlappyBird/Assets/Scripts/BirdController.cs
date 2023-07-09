@@ -27,10 +27,7 @@ public class BirdController : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _rb2d.position.y < _yaxisLimit)
-        {
-            Flap();
-        }
+        
     }
 
 
@@ -83,8 +80,13 @@ public class BirdController : MonoBehaviour
 
     public void Flap()
     {
-        _rb2d.velocity = Vector2.zero;
-        _rb2d.AddForce(Vector2.up * _force);
+        
+        if(transform.position.y < _yaxisLimit)
+        {
+            _rb2d.velocity = Vector2.zero;
+            _rb2d.AddForce(Vector2.up * _force);
+
+        }
     }
 
     private void TakeDamage(int damage)
