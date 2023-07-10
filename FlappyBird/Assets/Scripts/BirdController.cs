@@ -7,11 +7,15 @@ using TMPro;
 public class BirdController : MonoBehaviour
 {
     public static event Action onDeath;
-    
+
     public static event Action onTap;
     public int maxHealth = 100;
     public int currentHealth;
     public HealthManager healthBar;
+    public int healthGain = 10;
+    public int damage = 2;
+    [SerializeField] private GameObject floatingText;
+
 
     [SerializeField] private Rigidbody2D _rb2d;
     [SerializeField] private float _force;
@@ -22,13 +26,6 @@ public class BirdController : MonoBehaviour
         Time.timeScale = 1f;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && _rb2d.position.y < _yaxisLimit)
-        {
-            Flap();
-        }
     }
 
 
@@ -44,29 +41,50 @@ public class BirdController : MonoBehaviour
     {
         if (col.tag == "Tree")
         {
-             TakeDamage(2);
+            TakeDamage(damage);
         }
 
         if (col.tag == "Cloud")
         {
-            col.gameObject.SetActive(false);
-            TakeDamage(2);
+            //col.gameObject.SetActive(false);
+            col.transform.GetChild(0).gameObject.SetActive(true);
+            col.GetComponent<SpriteRenderer>().enabled = false;
+            col.GetComponent<Rigidbody2D>().AddForce(_rb2d.velocity * 10);
+            col.GetComponent<Rigidbody2D>().AddForce(transform.right * ObstacleSpawner.gameSpeed * 100);
+            col.GetComponent<Collider2D>().enabled = false;
+            TakeDamage(damage);
+        }
+
+        if (col.tag == "Food")
+        {
+            if (currentHealth <= maxHealth - healthGain)
+            {
+                col.gameObject.SetActive(false);
+                healthBar.SetHealth(currentHealth + healthGain);
+                ShowHealthGain(healthGain.ToString());
+
+            }
+            else if (currentHealth > maxHealth - healthGain)
+            {
+                col.gameObject.SetActive(false);
+                healthBar.SetHealth(maxHealth);
+
+            }
         }
     }
 
-    //private void OnTriggerExit2D(Collider2D col)
-    //{
-        //if (col.tag == "Obstacle")
-        //{
-            //onScore?.Invoke();
-        //}
-    //}
+
 
 
     public void Flap()
     {
-        _rb2d.velocity = Vector2.zero;
-        _rb2d.AddForce(Vector2.up * _force);
+
+        if (transform.position.y < _yaxisLimit)
+        {
+            _rb2d.velocity = Vector2.zero;
+            _rb2d.AddForce(Vector2.up * _force);
+
+        }
     }
 
     private void TakeDamage(int damage)
@@ -75,13 +93,14 @@ public class BirdController : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-    private void Death()
-    {
-        if(currentHealth == 0)
-        {
-            onDeath?.Invoke();
 
-            Time.timeScale = 0f;
+
+    private void ShowHealthGain(string healthGainText)
+    {
+        if (floatingText)
+        {
+            GameObject prefab = Instantiate(floatingText, transform.position, Quaternion.identity,transform);
+            prefab.GetComponentInChildren<TextMeshPro>().text = healthGainText;
         }
     }
 }
