@@ -8,8 +8,6 @@ public class SunMoonController : MonoBehaviour
     [SerializeField] private Transform _Moon;
     [SerializeField, Range(5f, 60f)] private float _duration;
     [SerializeField] private AnimationCurve _animationCurve;
-    [SerializeField] private Transform _startPosition;
-    [SerializeField] private Transform _endPosition;
     [SerializeField] private Camera _Maincamera;
     [SerializeField] private Color dayColor;
     [SerializeField] private Color nightColor;
@@ -18,6 +16,10 @@ public class SunMoonController : MonoBehaviour
 
     public bool isDay = true;
     private float timer = 0f;
+
+    private float x = 10;
+    private float y = 0;
+    private float xmax = 10;
 
 
     private void Start()
@@ -28,12 +30,7 @@ public class SunMoonController : MonoBehaviour
         UpdateBackgroundColor();
     }
 
-    private float x = 10;
-    private float y = 0;
-    private float xmax = 10;
     
-    //private float ymax;
-    //private float ymin;
 
     private void Update()
     {
@@ -84,29 +81,6 @@ public class SunMoonController : MonoBehaviour
     {
         yield return new WaitForSeconds(0f);
     }
-
-    /*private void Update()
-    {
-        timer += Time.deltaTime;
-
-        if (timer > _duration)
-        {
-            isDay = !isDay;
-            timer = 0f;
-            UpdateBackgroundColor();
-
-            if (!isDay)
-            {
-                StartCoroutine(AnimateObject(_Moon.transform, _endPosition.position, _startPosition.position, _duration));
-                StartCoroutine(AnimateObject(_Sun.transform, _startPosition.position, _endPosition.position, _duration));
-            }
-            else
-            {
-                StartCoroutine(AnimateObject(_Moon.transform, _startPosition.position, _endPosition.position, _duration));
-                StartCoroutine(AnimateObject(_Sun.transform, _endPosition.position, _startPosition.position, _duration));
-            }
-        }
-    }*/
 
     private IEnumerator AnimateObject(Transform target, Vector3 startPosition, Vector3 endPosition, float duration)
     {
