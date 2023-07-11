@@ -40,7 +40,7 @@ public class MenuManager : MonoBehaviour
         if (timerStart == true)
         {
             currentTime += Time.deltaTime;
-            gameTimerText.text = "Total TIme : " + currentTime.ToString("0.0");
+            //gameTimerText.text = "Total TIme : " + currentTime.ToString("0.0");
         }
     }
 
