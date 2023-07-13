@@ -10,10 +10,11 @@ public class FoodSpawner : ObstacleSpawner
     private float xAxisOutsideCameraPosition;
 
     
-    private void Start()
-        {
-            xAxisOutsideCameraPosition = Random.Range(12, 24);
-        }
+    protected override void Start()
+    {
+        base.Start();
+        xAxisOutsideCameraPosition = Random.Range(12, 24);
+    }
 
     protected override void SpawnObject()
     {
