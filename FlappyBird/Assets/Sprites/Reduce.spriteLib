@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: HealthReduce
+    m_Hash: 1038781328
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Dark-Bolt5
+      m_Hash: 1047422136
+      m_Sprite: {fileID: 21300000, guid: d75d6edf1583dc044be903f57150b4d3, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 21300000, guid: d75d6edf1583dc044be903f57150b4d3, type: 3}
+    - m_Name: Dark-Bolt6
+      m_Hash: 661075202
+      m_Sprite: {fileID: 21300000, guid: fbd47039848e71c44afb167e1d7f5963, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 21300000, guid: fbd47039848e71c44afb167e1d7f5963, type: 3}
+    - m_Name: Dark-Bolt7
+      m_Hash: 274728340
+      m_Sprite: {fileID: 21300000, guid: 3a96b3e57bab4884aa2705b82cb7ad3a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 21300000, guid: 3a96b3e57bab4884aa2705b82cb7ad3a, type: 3}
+    - m_Name: Dark-Bolt8
+      m_Hash: 14620677
+      m_Sprite: {fileID: 21300000, guid: ccd225141c67eab418004b35e4d1b568, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 21300000, guid: ccd225141c67eab418004b35e4d1b568, type: 3}
+    - m_Name: Dark-Bolt9
+      m_Hash: 936913043
+      m_Sprite: {fileID: 21300000, guid: f5fae886cbec54042b1a1815614d7831, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 21300000, guid: f5fae886cbec54042b1a1815614d7831, type: 3}
+    - m_Name: Dark-Bolt10
+      m_Hash: 368267263
+      m_Sprite: {fileID: 21300000, guid: afd6e22d91eddde4a9e24769fe79c104, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 21300000, guid: afd6e22d91eddde4a9e24769fe79c104, type: 3}
+    - m_Name: Dark-Bolt11
+      m_Hash: 586448745
+      m_Sprite: {fileID: 21300000, guid: 8d21abddb3e25784aa3d53d20f6c9d7b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 21300000, guid: 8d21abddb3e25784aa3d53d20f6c9d7b, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 7
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638246781456700739
+  m_Version: 1

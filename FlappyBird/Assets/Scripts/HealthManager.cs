@@ -6,30 +6,73 @@ using System;
 
 public class HealthManager : MonoBehaviour
 {
-    public Slider healthSlider;
+    public Image healthSlider;
     public Gradient gradient;
-    public Image fill;
+    //public Image fill;
     public GameObject _restartButton;
-    public static event Action onDeath;
+    public static event Action onHealthZero;
+    public float visibleHealth;
+    public int targetHealth;
+    public GameObject _particleSystem;
 
+    public Animator HealthReduceVFX;
+    private void Start()
+    {
+
+    }
+    private void Update()
+    {
+        if((int)visibleHealth > targetHealth)
+        {
+            visibleHealth = visibleHealth - (10 * Time.deltaTime);
+            healthSlider.fillAmount = visibleHealth/100;
+            //RectTransform baseTransform = GetComponent<RectTransform>();
+            //float percentWidth = visibleHealth / 100;
+            //float mappedValue = percentWidth * baseTransform.sizeDelta.x;
+            //sliderValue_Debug.text = mappedValue.ToString();
+            //_particleSystem.GetComponent<RectTransform>().anchoredPosition = new Vector2(mappedValue, _particleSystem.GetComponent<RectTransform>().anchoredPosition.y);
+            
+            HealthReduceVFX.SetBool("Reducing", true);
+        }
+        else if((int)visibleHealth < targetHealth)
+        {
+            visibleHealth = visibleHealth + (10 * Time.deltaTime);
+            healthSlider.fillAmount = visibleHealth/100;
+            //RectTransform baseTransform = GetComponent<RectTransform>();
+            //float percentWidth = visibleHealth / 100;
+            //float mappedValue = percentWidth * baseTransform.sizeDelta.x;
+            //sliderValue_Debug.text = mappedValue.ToString();
+            //_particleSystem.GetComponent<RectTransform>().anchoredPosition = new Vector2(mappedValue, _particleSystem.GetComponent<RectTransform>().anchoredPosition.y);
+
+        }
+        else
+        {
+            HealthReduceVFX.SetBool("Reducing", false);
+        }
+    }
     public void SetHealth(int health)
     {
-        healthSlider.value = health;
-        fill.color = gradient.Evaluate(healthSlider.normalizedValue);
+        // it is setting the value of health bar (UI) directly
+        //healthSlider.value = health;
+        // it is giving us a target value which should be shouwn in health bar (UI) eventually(along some time period)
+        targetHealth = health;
+        healthSlider.color = gradient.Evaluate(healthSlider.fillAmount);
 
-        if(health <= 0)
+        if(targetHealth <= 0)
         {
-            onDeath?.Invoke();
+            onHealthZero?.Invoke();
 
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
             _restartButton.SetActive(true);
         }
     }
 
     public void SetMaxHealth(int health)
     {
-        healthSlider.maxValue = health;
-        healthSlider.value = health;
-        fill.color = gradient.Evaluate(1f);
+        //healthSlider.maxValue = health;
+        healthSlider.fillAmount = health;
+        visibleHealth = health;
+        targetHealth = health;
+        healthSlider.color = gradient.Evaluate(1f);
     }
 }

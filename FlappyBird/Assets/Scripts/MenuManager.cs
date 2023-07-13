@@ -6,51 +6,52 @@ using TMPro;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _restartButton;
-    [SerializeField] private GameObject _tappingButton;
+    [SerializeField] private GameObject startText;
     [SerializeField] private GameObject Game;
-    [SerializeField] private Button _playButton;
+    [SerializeField] private Button _TapButton;
     [SerializeField] private TMP_Text highScore;
     [SerializeField] private TMP_Text _score;
-    [SerializeField] private TMP_Text gameTimerText;
+    [SerializeField] private TMP_Text _score_GameEnd;
+    //[SerializeField] private TMP_Text gameTimerText;
     public float currentTime;
     private bool timerStart = false;
     public BirdController birdController;
     public SunMoonController SunMoonController;
 
-    [SerializeField] private GameObject floatingText;
+    //[SerializeField] private GameObject floatingText;
+
+    [SerializeField] private GameObject gameOverScreen;
 
     public static bool IsPlaying = false;
 
     private void Start()
     {
         Game.SetActive(false);
-        _playButton.onClick.AddListener(OnPlay);
+        _TapButton.onClick.AddListener(OnPlay);
         UpdateHighScore();
     }
 
     private void Update()
     {
+        //timerStart = true;
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
             OnTap();
-            timerStart = true;
-
         }
-        if (timerStart == true)
+        /*if (timerStart == true && IsPlaying == true)
         {
             currentTime += Time.deltaTime;
-            gameTimerText.text = "Total TIme : " + currentTime.ToString("0.0");
-        }
+            gameTimerText.text = "Total Game Time : " + currentTime.ToString("0.0");
+        }*/
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         BirdController.onDeath += OnGameOver;
         ObstacleMover.onScore += OnScoreText;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         BirdController.onDeath -= OnGameOver;
         ObstacleMover.onScore -= OnScoreText;
@@ -59,11 +60,17 @@ public class MenuManager : MonoBehaviour
     public void OnRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SoundManager.Instance.Play(SoundManager.Sounds.ButtonClick);
+        gameOverScreen.SetActive(false);
     }
     private void OnGameOver()
     {
         IsPlaying = false;
+        timerStart = false;
+        UpdateHighScore();
         _restartButton.SetActive(true);
+        gameOverScreen.SetActive(true);
+        
     }
 
     private void OnScoreText()
@@ -71,10 +78,12 @@ public class MenuManager : MonoBehaviour
         if (SunMoonController.isDay)
         {
             _score.text = (int.Parse(_score.text) + 1).ToString();
+            _score_GameEnd.text = (int.Parse(_score.text) + 1).ToString();
         }
         else
         {
-            _score.text = (int.Parse(_score.text) + 2).ToString();
+            _score.text =  (int.Parse(_score.text) + 2).ToString();
+            _score_GameEnd.text =  (int.Parse(_score.text) + 2).ToString();
         }
 
         ChechHighScore();
@@ -90,7 +99,7 @@ public class MenuManager : MonoBehaviour
 
     private void UpdateHighScore()
     {
-        highScore.text = $"High Score : {PlayerPrefs.GetInt("HighScore", 0)}";
+        highScore.text = $"{PlayerPrefs.GetInt("HighScore", 0)}";
     }
     public void OnTap()
     {
@@ -104,18 +113,20 @@ public class MenuManager : MonoBehaviour
 
     public void OnPlay()
     {
-
+        _TapButton.onClick.RemoveAllListeners();
+        _TapButton.onClick.AddListener(OnTap);
         IsPlaying = true;
         Game.SetActive(true);
-        _playButton.gameObject.SetActive(false);
+        startText.gameObject.SetActive(false);
+        //_TapButton.gameObject.SetActive(false);
     }
 
     public void ShowHealthGain(string healthGainText)
     {
-        if (floatingText)
-        {
-            GameObject prefab = Instantiate(floatingText, transform.position, Quaternion.identity, transform);
-            prefab.GetComponentInChildren<TextMeshPro>().text = healthGainText;
-        }
+        //if (floatingText)
+       // {
+        //    GameObject prefab = Instantiate(floatingText, transform.position, Quaternion.identity, transform);
+        //    prefab.GetComponentInChildren<TextMeshPro>().text = healthGainText;
+        //}
     }
 }
