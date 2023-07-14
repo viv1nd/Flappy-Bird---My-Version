@@ -14,7 +14,7 @@ public class HealthManager : MonoBehaviour
     public float visibleHealth;
     public int targetHealth;
     public GameObject _particleSystem;
-
+    public float fillSpeed = 1f;
     public Animator HealthReduceVFX;
     private void Start()
     {
@@ -24,7 +24,7 @@ public class HealthManager : MonoBehaviour
     {
         if((int)visibleHealth > targetHealth)
         {
-            visibleHealth = visibleHealth - (10 * Time.deltaTime);
+            visibleHealth = visibleHealth - (10 * Time.deltaTime) * fillSpeed;
             healthSlider.fillAmount = visibleHealth/100;
             //RectTransform baseTransform = GetComponent<RectTransform>();
             //float percentWidth = visibleHealth / 100;
@@ -36,7 +36,7 @@ public class HealthManager : MonoBehaviour
         }
         else if((int)visibleHealth < targetHealth)
         {
-            visibleHealth = visibleHealth + (10 * Time.deltaTime);
+            visibleHealth = visibleHealth + (10 * Time.deltaTime) * fillSpeed;
             healthSlider.fillAmount = visibleHealth/100;
             //RectTransform baseTransform = GetComponent<RectTransform>();
             //float percentWidth = visibleHealth / 100;

@@ -75,7 +75,8 @@ public class SoundManager : MonoBehaviour
         SoundType soundType = Array.Find(soundTypes, type => type._typeOfSound == sounds);
         if (soundType != null)
         {
-            return soundType.audioClip;
+            int random = UnityEngine.Random.Range(0, soundType.audioClip.Count-1);
+            return soundType.audioClip[random];
         }
         else
         {
@@ -90,7 +91,7 @@ public class SoundManager : MonoBehaviour
     public class SoundType
     {
         public Sounds _typeOfSound;
-        public AudioClip audioClip;
+        public List<AudioClip> audioClip;
     }
 
 
@@ -103,5 +104,6 @@ public class SoundManager : MonoBehaviour
         BGM,
         FlapSound,
         CloudBurst,
+        GoingOutsideCamera,
     }
 }

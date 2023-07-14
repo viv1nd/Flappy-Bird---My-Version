@@ -25,6 +25,8 @@ public class BirdController : MonoBehaviour
     [SerializeField] private float _yaxisLimit;
     [SerializeField] private Color dayColor;
     [SerializeField] private Color nightColor;
+    [SerializeField] private Transform HealthReduceOverlay_UI;
+    [SerializeField] private float playAreMaxHeight = 5.7f;
 
     private void Start()
     {
@@ -40,15 +42,45 @@ public class BirdController : MonoBehaviour
 
     private void DisableMe()
     {
+        HealthReduceOverlay_UI.gameObject.SetActive(false);
         onDeath?.Invoke();
     }
 
     private void Update()
     {
-        //if (dayNightController.isDay)
-        //{
+        if(transform.position.y > playAreMaxHeight)
+        {
+            SecondsTracker();
+        }
+        else if(HealthReduceOverlay_UI.gameObject.activeInHierarchy)
+        {
+            BackInPlayArea();
+        }
+    }
 
-        //}
+    bool ReducingHealth = false;
+    private void SecondsTracker()
+    {
+        if(ReducingHealth == false)
+        {
+            StartCoroutine(OutOfPlayArea());
+        }
+    }
+
+    IEnumerator OutOfPlayArea()
+    {
+        ReducingHealth = true;
+        yield return new WaitForSeconds(1f);
+        TakeDamage(5);
+        HealthReduceOverlay_UI.gameObject.SetActive(true);
+        SoundManager.Instance.Play(SoundManager.Sounds.GoingOutsideCamera);
+        ReducingHealth = false;
+    }
+
+    private void BackInPlayArea()
+    {
+        StopCoroutine(OutOfPlayArea());
+        HealthReduceOverlay_UI.gameObject.SetActive(false);
     }
 
     private void OnDisable()
@@ -107,7 +139,7 @@ public class BirdController : MonoBehaviour
     }
 
 
-
+    
 
     public void Flap()
     {

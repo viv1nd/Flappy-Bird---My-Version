@@ -22,7 +22,9 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void DisableMe()
     {
-        Destroy(this.gameObject);
+        gameSpeed = 1f;
+        this.transform.parent.gameObject.SetActive(false);
+        //Destroy(this.gameObject);
     }
 
     private void OnDisable()

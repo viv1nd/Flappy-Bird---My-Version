@@ -12,15 +12,18 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TMP_Text highScore;
     [SerializeField] private TMP_Text _score;
     [SerializeField] private TMP_Text _score_GameEnd;
+    [SerializeField] private Transform heartBreakEffect;
     //[SerializeField] private TMP_Text gameTimerText;
     public float currentTime;
-    private bool timerStart = false;
+    public bool isGameEnd = false;
+    //private bool timerStart = false;
     public BirdController birdController;
     public SunMoonController SunMoonController;
 
     //[SerializeField] private GameObject floatingText;
 
     [SerializeField] private GameObject gameOverScreen;
+    //[SerializeField] private GameObject brokenHeartObject;
 
     public static bool IsPlaying = false;
 
@@ -59,18 +62,29 @@ public class MenuManager : MonoBehaviour
 
     public void OnRestart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        IsPlaying = false;
         SoundManager.Instance.Play(SoundManager.Sounds.ButtonClick);
-        gameOverScreen.SetActive(false);
+        SceneManager.LoadScene(1);
+        //gameOverScreen.SetActive(false);
+
     }
     private void OnGameOver()
     {
-        IsPlaying = false;
-        timerStart = false;
-        UpdateHighScore();
-        _restartButton.SetActive(true);
-        gameOverScreen.SetActive(true);
         
+        //timerStart = false;
+        UpdateHighScore();
+        gameOverScreen.SetActive(true);
+        StartCoroutine(DelayedEnd());
+        
+    }
+
+    IEnumerator DelayedEnd()
+    {
+        yield return new WaitForSeconds(1f);
+        heartBreakEffect.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        _restartButton.SetActive(true);
+        isGameEnd = true;
     }
 
     private void OnScoreText()
@@ -104,11 +118,26 @@ public class MenuManager : MonoBehaviour
     public void OnTap()
     {
 
+        if (isGameEnd == true)
+        {
+            //IsPlaying = false;
+            isGameEnd = false;
+            OnRestart();
+            return;
+        }
+
         if (IsPlaying == false)
         {
             OnPlay();
+            //birdController.Flap();
         }
-        birdController.Flap();
+        else
+        {
+            if(birdController.isActiveAndEnabled)
+                birdController.Flap();
+        }
+        
+        
     }
 
     public void OnPlay()

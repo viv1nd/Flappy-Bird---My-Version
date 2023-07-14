@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 712875863440519694}
-  - component: {fileID: 7289243821218870050}
+  - component: {fileID: -3732383947617333773}
   m_Layer: 0
   m_Name: GroundBackground
   m_TagString: Untagged
@@ -38,7 +38,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7289243821218870050
+--- !u!114 &-3732383947617333773
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,12 +47,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3382541194287480194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b77c02a23ff4b14fa0001c42f302ed1, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d6473c253c5b854a9f03589a16df363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
-  _xaxisScoreLimit: -5
-  _xaxisGameEndLimit: -20
+  _xaxisGameEndLimit: -30
 --- !u!1 &6594583462814747705
 GameObject:
   m_ObjectHideFlags: 0
