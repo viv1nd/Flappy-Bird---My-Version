@@ -2206,6 +2206,7 @@ MonoBehaviour:
   visibleHealth: 0
   targetHealth: 0
   _particleSystem: {fileID: 1250754751}
+  fillSpeed: 3
   HealthReduceVFX: {fileID: 578658552}
 --- !u!222 &1180090853
 CanvasRenderer:
