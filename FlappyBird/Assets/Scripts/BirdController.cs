@@ -73,7 +73,7 @@ public class BirdController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         TakeDamage(5);
         HealthReduceOverlay_UI.gameObject.SetActive(true);
-        SoundManager.Instance.Play(SoundManager.Sounds.CloudBurst);
+        SoundManager.Instance.Play(SoundManager.Sounds.GoingOutsideCamera);
         ReducingHealth = false;
     }
 

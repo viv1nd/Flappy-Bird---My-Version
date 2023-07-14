@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TMP_Text highScore;
     [SerializeField] private TMP_Text _score;
     [SerializeField] private TMP_Text _score_GameEnd;
+    [SerializeField] private Transform heartBreakEffect;
     //[SerializeField] private TMP_Text gameTimerText;
     public float currentTime;
     public bool isGameEnd = false;
@@ -22,6 +23,7 @@ public class MenuManager : MonoBehaviour
     //[SerializeField] private GameObject floatingText;
 
     [SerializeField] private GameObject gameOverScreen;
+    //[SerializeField] private GameObject brokenHeartObject;
 
     public static bool IsPlaying = false;
 
@@ -78,7 +80,9 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator DelayedEnd()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
+        heartBreakEffect.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
         _restartButton.SetActive(true);
         isGameEnd = true;
     }
